@@ -14,8 +14,8 @@
  #include <linux/module.h>
  #include <linux/state_notifier.h>
 
- #define DEFAULT_SUSPEND_DEFER_TIME 	10
- #define STATE_NOTIFIER			"state_notifier"
+#define DEFAULT_SUSPEND_DEFER_TIME 	1
+#define STATE_NOTIFIER			"state_notifier"
 
  /*
  * debug = 1 will print all
