@@ -13,7 +13,7 @@ jobs:
           command: |
            apt-get -y update && apt-get -y upgrade && apt-get -y install bc build-essential zip curl libstdc++6 git wget python gcc clang libssl-dev repo rsync flex bison
            mkdir kernel && cd kernel
-           wget https://raw.githubusercontent.com/andeh24/kernel_xiaomi_msm8917/purecaf/script.sh && bash script.sh
+           wget https://raw.githubusercontent.com/andeh24/kernel_xiaomi_msm8917/simplified-purecaf/script.sh && bash script.sh
 workflows:
   version: 2.1
   cooking:

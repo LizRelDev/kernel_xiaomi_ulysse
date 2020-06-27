@@ -3,20 +3,20 @@
 # Copyright (C) 2019, 2020, Raphielscape LLC (@raphielscape)
 # Copyright (C) 2019, 2020, Dicky Herlambang (@Nicklas373)
 # Copyright (C) 2020, Muhammad Fadlyas (@fadlyas07)
-git clone --depth=1 https://github.com/andeh24/kernel_xiaomi_msm8917 kernel -b simplified-oc
+git clone --depth=1 https://github.com/andeh24/kernel_xiaomi_msm8917 kernel -b simplified-purecaf
 cd kernel
 export parse_branch=$(git rev-parse --abbrev-ref HEAD)
 git clone --depth=1 https://github.com/chips-project/priv-toolchains -b non-elf/gcc-9.2.0/arm gcc32
 git clone --depth=1 https://github.com/chips-project/priv-toolchains -b non-elf/gcc-9.2.0/arm64 gcc
 git clone --depth=1 --single-branch https://github.com/fabianonline/telegram.sh telegram
-git clone --depth=1 --single-branch https://github.com/andeh24/anykernel-3
+git clone --depth=1 --single-branch https://github.com/andeh24/anykernel-3 -b purecaf
 mkdir $(pwd)/temp
 export ARCH=arm64
 export TEMP=$(pwd)/temp
 export TELEGRAM_ID=-1001277959729
 export TELEGRAM_TOKEN=1030153459:AAH61KzwmtwM8cMl630_i3OrDTIC0WOzkLk
 export pack=$(pwd)/anykernel-3
-export product_name=Simplified Kernel OC
+export product_name=SimplifiedPureCAF
 export device="Redmi Note 5A Lite"
 export KBUILD_BUILD_HOST=$(git log --format='%H' -1)
 export KBUILD_BUILD_USER=$(git log --format='%cn' -1)
@@ -61,6 +61,5 @@ build_end=$(date +"%s")
 build_diff=$(($build_end - $build_start))
 kernel_ver=$(cat $(pwd)/out/.config | grep Linux/arm64 | cut -d " " -f3)
 toolchain_ver=$(cat $(pwd)/out/include/generated/compile.h | grep LINUX_COMPILER | cut -d '"' -f2)
-tg_sendstick
 tg_channelcast "⚠️ <i>Warning: New build is available!</i> working on <b>$parse_branch</b> in <b>Linux $kernel_ver</b> using <b>$toolchain_ver</b> for <b>$device</b> at commit <b>$(git log --pretty=format:'%s' -1)</b>. Build complete in $(($build_diff / 60)) minutes and $(($build_diff % 60)) seconds."
 curl -F document=@$(echo $pack/*.zip) "https://api.telegram.org/bot$TELEGRAM_TOKEN/sendDocument" -F chat_id="$TELEGRAM_ID"
