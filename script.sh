@@ -6,7 +6,7 @@
 git clone --depth=1 https://github.com/andeh24/kernel_xiaomi_msm8917 kernel -b purecaf
 cd kernel
 export parse_branch=$(git rev-parse --abbrev-ref HEAD)
-git clone https://android.googlesource.com/platform/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9 --depth=1 -b ndk-r19 gcc && git clone https://android.googlesource.com/platform/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.9 --depth=1 -b ndk-r19 gcc32
+git clone --depth=1 https://github.com/chips-project/priv-toolchains -b non-elf/gcc-9.2.0/arm gcc32 && git clone --depth=1 https://github.com/chips-project/priv-toolchains -b non-elf/gcc-9.2.0/arm64 gcc
 git clone --depth=1 --single-branch https://github.com/fabianonline/telegram.sh telegram
 git clone --depth=1 --single-branch https://github.com/andeh24/anykernel-3 -b purecaf
 mkdir $(pwd)/temp
@@ -37,7 +37,7 @@ tg_channelcast() {
  )"
 }
 tg_build() {
-export CROSS_COMPILE="$(pwd)/gcc/bin/aarch64-linux-android-" && export CROSS_COMPILE_ARM32="$(pwd)/gcc32/bin/arm-linux-androideabi-"
+export CROSS_COMPILE="$(pwd)/gcc/bin/aarch64-linux-gnu-" && export CROSS_COMPILE_ARM32="$(pwd)/gcc32/bin/arm-linux-gnueabi-"
 make O=out -j$(nproc --all)
 }
 date=$(TZ=Asia/Makassar date +'%H%M-%d%m%y')
