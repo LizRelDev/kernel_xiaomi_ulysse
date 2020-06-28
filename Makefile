@@ -636,7 +636,11 @@ KBUILD_CFLAGS	+= $(call cc-option,--param=allow-store-data-races=0)
 KBUILD_CFLAGS   += $(call cc-option,-fno-store-merging,)
 
 # Warnings safe to disable
+KBUILD_CFLAGS	+= $(call cc-disable-warning,maybe-uninitialized,)
+KBUILD_CFLAGS	+= $(call cc-disable-warning,frame-address,)
 KBUILD_CFLAGS	+= $(call cc-disable-warning, address-of-packed-member)
+KBUILD_CFLAGS   += $(call cc-disable-warning, missing-attributes)
+KBUILD_CFLAGS	+= $(call cc-disable-warning, psabi)
 
 ifdef CONFIG_READABLE_ASM
 # Disable optimizations that make assembler listings hard to read.
